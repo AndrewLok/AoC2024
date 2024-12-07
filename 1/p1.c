@@ -1,5 +1,5 @@
 /*
-    --- Day 1: Historian Hysteria ---
+    --- Day 1 (Part 1): Historian Hysteria ---
 
     The Chief Historian is always present for the big Christmas sleigh launch, but nobody has seen him in months! Last anyone heard, he was visiting locations that are historically significant to the North Pole; a group of Senior Historians has asked you to accompany them as they check the places they think he was most likely to visit.
 
@@ -45,10 +45,9 @@
 #include<stdio.h>
 #include <stdlib.h>
 
-// Solution: Sort both lists from smallest to largest. Compare both sorted lists and subtract each element from smallest to largest. Add the absolute value of the each resulting subtraction.
 int main() {
     // Get the puzzle input from the file.
-    FILE *input = fopen("p1Inp.txt", "r");
+    FILE *input = fopen("inp.txt", "r");
     if (input == NULL) {
         printf("File does not exist.");
         return 0;
@@ -58,7 +57,7 @@ int main() {
     int list1[1000];
     int list2[1000];
 
-    char curStr[15]; // Assumes each line is of lenth 13 (ignores \n and EOF).
+    char curStr[15]; // Assumes each line is of lenth 15 (ignores \n and EOF).
     int count = 0;
     while (fgets(curStr, 15, input)) {
         if (count == 1000)
@@ -75,7 +74,7 @@ int main() {
     }
     fclose(input);
 
-    // Loop through each array. If the current int is smaller than the previous, 
+    // Sort both lists from smallest to largest.
     int i;
     for (i = 0; i < 1000; i++) {
         int j;
@@ -95,6 +94,7 @@ int main() {
     }
     
 
+    // Find the distance between each corresponding element of the lists and add them.
     int sum = 0;
     for (i = 0; i < 1000; i++) {
         sum += abs(list1[i] - list2[i]);
